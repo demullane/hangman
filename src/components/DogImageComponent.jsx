@@ -38,7 +38,7 @@ class DogImageComponent extends Component {
   render() {
     if (!this.state.isLoading) {
       return (
-        <img src={`https://images.dog.ceo/breeds/${this.state.breed}/${this.state.image}`} alt={this.state.breed} />
+        <img src={`https://images.dog.ceo/breeds/${this.state.breed}/${this.state.image}`} alt={this.state.breed} style={{maxWidth: '400px'}} />
       )
     } else {
       return null;
