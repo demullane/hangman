@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DogImageComponent from './components/DogImageComponent';
-import { AppBody, Header, StyledWordToGuessBox } from './App.styled';
+import { AppBody, Header, StyledWordsToGuessBox } from './App.styled';
 import Illustration from './components/Illustration';
 import Keyboard from './components/Keyboard';
 
@@ -10,15 +10,24 @@ class App extends Component {
     this.submitLetter = this.submitLetter.bind(this);
     this.state = {
       isImgLoading: false,
+      correctlySelectedKeys: ['A', 'J'],
       selectedKeys: [],
+      stringToGuess: 'JavaScript is Awesome',
       unselectedKeys: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     }
   }
 
   submitLetter = (event) => {
     const chosenLetter = event.target.value;
+    const isLetterInString = this.state.stringToGuess.includes(chosenLetter);
+    if (isLetterInString) {
+      this.setState(prevState => ({
+        ...prevState,
+        correctlySelectedKeys: prevState.correctlySelectedKeys.concat(chosenLetter),
+      }));
+    }
     this.setState(prevState => ({
-      ...prevState, 
+      ...prevState,
       selectedKeys: prevState.selectedKeys.concat(chosenLetter),
       unselectedKeys: prevState.unselectedKeys.filter(letter => letter !== chosenLetter),
     }));
@@ -30,7 +39,10 @@ class App extends Component {
         <Header>HANGMAN</Header>
         {/* <DogImageComponent /> */}
         <Illustration />
-        <StyledWordToGuessBox />
+        <StyledWordsToGuessBox 
+          lettersGuessed={this.state.correctlySelectedKeys}
+          stringToGuess={this.state.stringToGuess}
+        />
         <Keyboard 
           selected={this.state.selectedKeys}
           unselected={this.state.unselectedKeys}

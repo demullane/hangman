@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import WordToGuessBox from './components/WordToGuessBox';
+import WordsToGuessBox from './components/WordsToGuessBox';
 
 const AppBody = styled.div`
   display: flex;
@@ -15,12 +15,12 @@ const Header = styled.h1`
   color: grey;
 `;
 
-const StyledWordToGuessBox = styled(WordToGuessBox)`
-  padding: 10px;
+const StyledWordsToGuessBox = styled(WordsToGuessBox)`
+  padding: 25px;
 `;
 
 export {
   AppBody,
   Header,
-  StyledWordToGuessBox,
+  StyledWordsToGuessBox,
 }
