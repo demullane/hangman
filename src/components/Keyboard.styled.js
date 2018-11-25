@@ -10,11 +10,12 @@ const Key = styled.button`
   padding: 5px;
   margin: 5px;
   outline: none;
+  background-color: ${({isSelected}) => isSelected ? 'red' : 'none'};
 
   &:hover {
-    cursor: pointer;
-    color: white;
-    background-color: lightgrey;
+    cursor: ${({ isSelected }) => isSelected ? 'not-allowed' : 'pointer'};;
+    color: ${({ isSelected }) => isSelected ? 'grey' : 'white'};;
+    background-color: ${({ isSelected }) => isSelected ? 'red' : 'lightgrey'};;
   }
 `;
 

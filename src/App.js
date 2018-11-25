@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 import './App.css';
 import DogImageComponent from './components/DogImageComponent';
+import Illustration from './components/Illustration';
 import Keyboard from './components/Keyboard';
 
 class App extends Component {
   constructor() {
     super();
+    this.submitLetter = this.submitLetter.bind(this);
     this.state = {
       isImgLoading: false,
       value: '',
+      selectedKeys: [],
+      unselectedKeys: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     }
+  }
+
+  submitLetter = (event) => {
+    const chosenLetter = event.target.value;
+    this.setState(prevState => ({
+      ...prevState, 
+      selectedKeys: prevState.selectedKeys.concat(chosenLetter),
+      unselectedKeys: prevState.unselectedKeys.filter(letter => letter !== chosenLetter),
+    }));
   }
 
   render() {
@@ -18,8 +31,13 @@ class App extends Component {
         <h1 className="App-header">
           HANGMAN
         </h1>
-        <DogImageComponent className="dog-image"/>
-        <Keyboard />
+        {/* <DogImageComponent /> */}
+        <Illustration />
+        <Keyboard 
+          selected={this.state.selectedKeys}
+          unselected={this.state.unselectedKeys}
+          onClick={this.submitLetter}
+        />
       </div>
     );
   }
@@ -31,20 +49,25 @@ export default App;
 
 // 2. need to submit a letter
   // check if letter exists in word
-  // VISUAL: show letters guessed
+  // VISUAL: show letters guessed (x)
   // VISUAL: if it does exist fill in blank spaces with letter
   // VISUAL: if it doesn't add a body part
-    // body parts: head, torso, right and left arms, right and left leg
+    // body parts: head, torso, right and left arms, right and left leg (x)
 
-// 3. submit button and field for submitting (maybe show letters to choose from?)
+// 3. submit button and field for submitting (maybe show letters to choose from?) (x)
 
-// 4. some sort of "You won!" or "You died :(" animation
+// 4. some sort of "You won!" or "You died :(" text
+
+// 5. play again (reset) button
 
 // LATER
   // styling
   // tests
   // fork and change to typescript
+  // remove dog api?? and add list of simple words?
+  // refactor svg file
 
   // EXTRA
   // dog or cat images
+  // hangman image gets darker and darker as you play more letters?
 
