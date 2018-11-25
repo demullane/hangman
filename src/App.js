@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 import DogImageComponent from './components/DogImageComponent';
+import { AppBody, Header, StyledWordToGuessBox } from './App.styled';
 import Illustration from './components/Illustration';
 import Keyboard from './components/Keyboard';
 
@@ -10,7 +10,6 @@ class App extends Component {
     this.submitLetter = this.submitLetter.bind(this);
     this.state = {
       isImgLoading: false,
-      value: '',
       selectedKeys: [],
       unselectedKeys: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     }
@@ -27,18 +26,17 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1 className="App-header">
-          HANGMAN
-        </h1>
+      <AppBody>
+        <Header>HANGMAN</Header>
         {/* <DogImageComponent /> */}
         <Illustration />
+        <StyledWordToGuessBox />
         <Keyboard 
           selected={this.state.selectedKeys}
           unselected={this.state.unselectedKeys}
           onClick={this.submitLetter}
         />
-      </div>
+      </AppBody>
     );
   }
 }
